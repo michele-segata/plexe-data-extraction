@@ -1,0 +1,33 @@
+[DEFAULT]
+defaultMap = default
+file = map-config
+leaderMap = leaderdelay
+frontMap = frontdelay
+
+[params]
+resdir = .
+
+[config]
+config = Protocols
+out = ProtocolsBusyCollisions
+map    = %(defaultMap)s
+mapFile = %(file)s
+prefix = pbc
+merge = 1
+
+[config]
+config = Protocols
+out = ProtocolsLeaderDelay
+map    = %(leaderMap)s
+mapFile = %(file)s
+prefix = pld
+merge = 0
+
+[config]
+config = Protocols
+out = ProtocolsFrontDelay
+map    = %(frontMap)s
+mapFile = %(file)s
+prefix = pfd
+merge = 0
+

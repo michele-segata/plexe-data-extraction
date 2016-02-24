@@ -1,0 +1,18 @@
+#default setup
+[default]
+module = scenario.node[*].prot
+names = nodeId,busyTime,collisions
+4 = useTxPowerControl
+5 = protocol
+6 = nCars
+7 = followerTxPower
+8 = runNumber
+
+#setup for delays stats, inherits from default
+[leaderdelay]
+inherit = default
+names = leaderDelayId,leaderDelay
+
+[frontdelay]
+inherit = default
+names = frontDelayId,frontDelay
