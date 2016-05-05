@@ -1,4 +1,4 @@
-This folder includes a set of scripts and configuration files to automatically
+This project includes a set of scripts and configuration files to automatically
 extract data from result files obtained through Plexe/Veins/OMNeT++ simulations.
 
 Before trying to run the scripts please make sure you have the following
