@@ -178,14 +178,13 @@ The required steps are the following:
 
     and hit enter, the scripts will extract the data for you. When done, you will
     find seven new `.Rdata` files, i.e.,
-
-    * `pbc.Protocols_2_200_0_0_160_100_9.Rdata`
-    * `pbc.Protocols_2_200_1_1_160_1_9.Rdata`
-    * `pld.Protocols_2_200_0_0_160_100_9.Rdata`
-    * `pld.Protocols_2_200_1_1_160_1_9.Rdata`
-    * `pfd.Protocols_2_200_0_0_160_100_9.Rdata`
-    * `pfd.Protocols_2_200_1_1_160_1_9.Rdata`
-    * `ProtocolsBusyCollisions.Rdata`
+    - `pbc.Protocols_2_200_0_0_160_100_9.Rdata`
+    - `pbc.Protocols_2_200_1_1_160_1_9.Rdata`
+    - `pld.Protocols_2_200_0_0_160_100_9.Rdata`
+    - `pld.Protocols_2_200_1_1_160_1_9.Rdata`
+    - `pfd.Protocols_2_200_0_0_160_100_9.Rdata`
+    - `pfd.Protocols_2_200_1_1_160_1_9.Rdata`
+    - `ProtocolsBusyCollisions.Rdata`
 
     The `pbc.*` files are the `.Rdata` files that extracted `nodeId`, `busyTime`, and
     `collisions` from the two `.vec` files, while the `pld.*` files are the ones that
