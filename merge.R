@@ -14,7 +14,7 @@
 #
 # Copyright (C) 2016 Bastian Bloessl <bloessl@ccs-labs.org>
 # Copyright (C) 2016 Michele Segata <segata@ccs-labs.org>
-
+library(data.table)
 source('generic-parsing-util.R')
 
 args <- commandArgs(trailingOnly = T)
@@ -42,16 +42,21 @@ if (length(args) != 0) {
 
 	allData <- data.frame()
 
-	for(f in 1:length(files)) {
-		cat("[", f, "/", length(files), "] current file", files[f], "\n")
-		load(files[f])
-		params <- get.params(files[f], map[[config]]$fields, suffix=".Rdata")
-		runData <- cbind(runData, params)
-		allData <- rbind(allData, runData)
-		rm(runData)
-		gc()
+	multmerge = function(files) {
+		i <- 1
+		datalist = lapply(files, function(x) {
+			cat("[", i, "/", length(files), "] current file", x, "\n")
+			i <<- i + 1
+			load(x)
+			params <- get.params(x, map[[config]]$fields, suffix=".Rdata")
+			runData <- cbind(runData, params)
+			runData
+		})
+		cat("Merging...\n")
+		rbindlist(datalist)
 	}
-
+	allData = multmerge(files)
+	cat("Saving to", outfile, "...\n")
 	save(allData, file=outfile)
 
 }
