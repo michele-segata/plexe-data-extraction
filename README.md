@@ -160,6 +160,11 @@ The required steps are the following:
       for the second option. Having a single merged file is very convenient
       because, when doing post-processing and plotting, you have all the data
       that you need at hand. The choice is up to you.
+    - `type` (e.g., `type = Rdata` (or `csv`)): by omitting this field or by
+      setting it to `Rdata`, the scripts will output binary `Rdata` files that
+      can be used with `R`. By setting the value to `csv`, the scripts will
+      output comma-separated-values files that can be used with any data
+      processing tool.
 
  3. Generate the `Makefile`. To perform this step run
 
@@ -178,19 +183,19 @@ The required steps are the following:
 
     and hit enter, the scripts will extract the data for you. When done, you will
     find seven new `.Rdata` files, i.e.,
-    - `pbc.Protocols_2_200_0_0_160_100_9.Rdata`
-    - `pbc.Protocols_2_200_1_1_160_1_9.Rdata`
+    - `pbc.Protocols_2_200_0_0_160_100_9.csv`
+    - `pbc.Protocols_2_200_1_1_160_1_9.csv`
     - `pld.Protocols_2_200_0_0_160_100_9.Rdata`
     - `pld.Protocols_2_200_1_1_160_1_9.Rdata`
     - `pfd.Protocols_2_200_0_0_160_100_9.Rdata`
     - `pfd.Protocols_2_200_1_1_160_1_9.Rdata`
-    - `ProtocolsBusyCollisions.Rdata`
+    - `ProtocolsBusyCollisions.csv`
 
-    The `pbc.*` files are the `.Rdata` files that extracted `nodeId`, `busyTime`, and
+    The `pbc.*` files are the `.csv` files that extracted `nodeId`, `busyTime`, and
     `collisions` from the two `.vec` files, while the `pld.*` files are the ones that
     extracted `leaderDelayId` and `leaderDelay` from the `.vec` files. Similarly, the
     `pfd.*` files are the ones that extracted `frontDelayId` and `frontDelay`.
-    `ProtocolsBusyCollisions.Rdata` is the merge of the two `pbc.*` files. Given that
+    `ProtocolsBusyCollisions.csv` is the merge of the two `pbc.*` files. Given that
     we disabled merging for the `pld.*` and the `pfd.*` files, we get no single
     merged file.
 

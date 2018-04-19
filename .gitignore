@@ -2,3 +2,4 @@ Makefile
 **.Rdata
 **.vec
 **.vci
+**.csv

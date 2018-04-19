@@ -14,6 +14,7 @@ map    = %(defaultMap)s
 mapFile = %(file)s
 prefix = pbc
 merge = 1
+type = csv
 
 [config]
 config = Protocols

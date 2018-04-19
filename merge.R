@@ -23,10 +23,14 @@ if (length(args) != 0) {
 
 	res.folder <- args[1]
 
-	files <- list.files(res.folder, pattern=paste('^', args[2], "_.*\\.Rdata", sep=""))
 	outfile <- paste(res.folder, args[3], sep="")
 	mapfile <- args[4]
 	config <- args[5]
+	outtype = "Rdata"
+	if (length(args) == 6) {
+		outtype = args[6]
+	}
+	files <- list.files(res.folder, pattern=paste('^', args[2], "_.*\\.", outtype, sep=""))
 
 	#get maps from mapfile
 	map <- parse.map(mapfile)
@@ -47,8 +51,12 @@ if (length(args) != 0) {
 		datalist = lapply(files, function(x) {
 			cat("[", i, "/", length(files), "] current file", x, "\n")
 			i <<- i + 1
-			load(x)
-			params <- get.params(x, map[[config]]$fields, suffix=".Rdata")
+			if (outtype == "Rdata") {
+				load(x)
+			} else {
+				runData <- read.csv(x)
+			}
+			params <- get.params(x, map[[config]]$fields, suffix=paste(".", outtype, sep=""))
 			runData <- cbind(runData, params)
 			runData
 		})
@@ -57,6 +65,10 @@ if (length(args) != 0) {
 	}
 	allData = multmerge(files)
 	cat("Saving to", outfile, "...\n")
-	save(allData, file=outfile)
+	if (outtype == "Rdata") {
+		save(allData, file=outfile)
+	} else {
+		write.csv(allData, file=outfile, row.names=F)
+	}
 
 }
