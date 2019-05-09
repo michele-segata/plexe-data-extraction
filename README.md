@@ -14,7 +14,7 @@ software installed:
  * `make`
  * `OMNeT++`
  * `R`
- * `reshape2` package for `R`
+ * `reshape2` and `data.table` packages for `R`
 
 The folder includes the following files that you are required to use:
 
