@@ -11,9 +11,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Copyright (C) 2016 Stefan Joerer <joerer@ccs-labs.org>
-# Copyright (C) 2016 Bastian Bloessl <bloessl@ccs-labs.org>
-# Copyright (C) 2016 Michele Segata <segata@ccs-labs.org>
+# Copyright (C) 2016-2019 Stefan Joerer <joerer@ccs-labs.org>
+# Copyright (C) 2016-2019 Bastian Bloessl <bloessl@ccs-labs.org>
+# Copyright (C) 2016-2019 Michele Segata <segata@ccs-labs.org>
 
 library(omnetpp)
 if (!suppressWarnings(require(reshape, warn.conflicts = F, quietly=T))) {
