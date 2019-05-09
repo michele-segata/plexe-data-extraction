@@ -15,6 +15,7 @@ software installed:
  * `OMNeT++`
  * `R`
  * `reshape2` and `data.table` packages for `R`
+ * `configparser` library for `python`
 
 The folder includes the following files that you are required to use:
 
