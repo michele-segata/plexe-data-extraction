@@ -21,7 +21,17 @@
 #
 
 library(data.table)
-source('generic-parsing-util.R')
+to.source <- c("generic-parsing-util.R")
+plexe.dir <- Sys.getenv("PLEXE_DIR")
+if (plexe.dir == "") {
+    plexe.bin.dir <- "."
+} else {
+    plexe.bin.dir <- paste(plexe.dir, "bin", sep="/")
+}
+for (f in paste(plexe.bin.dir, to.source, sep="/")) {
+    if (file.exists(f)) source(f)
+    else stop(paste(f, "not found. Did you define PLEXE_DIR by running 'source setenv'?"))
+}
 
 args <- commandArgs(trailingOnly = T)
 
