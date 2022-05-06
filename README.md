@@ -7,6 +7,13 @@ Plexe simulator.
 This project includes a set of scripts and configuration files to automatically
 extract data from result files obtained through Plexe/Veins/OMNeT++ simulations.
 
+The software works for OMNeT++ versions 5 and 6. It automatically detects the
+OMNeT++ version, and it uses the OMNeT++ R library for version 5 and the OMNeT++
+python library for version 6.
+The reason for keeping both is that the R library has been abandoned by the
+OMNeT developers in favor of the python library provided with OMNeT++ 6.
+The python library, however, does not support the old vector file format.
+
 Before trying to run the scripts please make sure you have the following
 software installed:
 
@@ -15,7 +22,14 @@ software installed:
  * `OMNeT++`
  * `R`
  * `reshape2` and `data.table` packages for `R`
- * `configparser` library for `python`
+ * `configparser`, `pandas`, `scipy`, and `matplotlib` libraries for `python`
+
+The root folder of this repository should be inside your `PATH`. If you are
+using Plexe, then these scripts are already provided within the `bin` folder of
+the Plexe codebase and added to the `PATH` using `source setenv` (see Plexe
+documentation).
+If you use this softare standalone, then you manually need to add the root
+folder to the `PATH`.
 
 The folder includes the following files that you are required to use:
 
@@ -29,10 +43,11 @@ The folder includes the following files that you are required to use:
    assign to those parameters in the post-processed R data file. More details
    later
  * `omnetpp_0.7-1.tar.gz`: this is the omnetpp `R` package that is needed to read
-   OMNeT++ result files from within `R`. CAREFUL: this is NOT the version you find
-   online, but a version modified by me to re-introduce some features that were
-   removed by the original authors. If you have the online version, please make
-   sure to remove it and install this version by typing
+   OMNeT++ result files from within `R`. **This is only needed if you are using
+   OMNeT++ version 5**. CAREFUL: this is NOT the version you find online, but a
+   version modified by me to re-introduce some features that were removed by the
+   original authors. If you have the online version, please make sure to remove it
+   and install this version by typing
 
   `R CMD INSTALL omnetpp_0.7-1.tar.gz`
 
@@ -47,10 +62,12 @@ Other files:
 
    to obtain the two `.vec` files `Protocols_2_200_0_0_160_100_9.vec` and
    `Protocols_2_200_1_1_160_1_9.vec`.
- * `generic-parser.R`: utility script
- * `generic-parsing-util.R`: utility script
+ * `generic-parser.R`: utility script (used for OMNeT++ version 5)
+ * `generic-parser.py`: utility script (used for OMNeT++ version 6)
+ * `generic-parsing-util.R`: utility script (user for OMNeT++ version 5)
  * `merge.R`: utility script
- * `omnet_helpers.R`: utility script
+ * `omnet_helpers.R`: utility script (used for OMNeT++ version 5)
+ * `csv-to-rdata.R`: utility script (used for OMNeT++ version 6)
 
 WORKING PRINCIPLE
 -
@@ -169,7 +186,7 @@ The required steps are the following:
 
  3. Generate the `Makefile`. To perform this step run
 
-    `python genmakefile.py parse-config > Makefile`
+    `genmakefile.py parse-config > Makefile`
 
  4. Run the `Makefile`. If you have a nice terminal with auto completion even for
     make targets, if you type
