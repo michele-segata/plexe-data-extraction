@@ -134,6 +134,16 @@ def get_longer(configs):
     return longer + 5
 
 
+# output safety checks for OMNeT version
+print("REQUIRED_VERSION=\"{}\"".format(get_omnet_version()))
+print("ifeq (, $(shell which opp_run))")
+print("$(error Cannot determine OMNeT++ version. Is opp_run in your PATH?)")
+print("endif")
+print("OPP_VERSION=\"$(shell opp_run -v | grep Version | sed -e \"s/Version: //\" -e \"s/,.*//\" | cut -d'.' -f 1)\"")
+print("ifneq (\"$(OPP_VERSION)\",\"$(REQUIRED_VERSION)\")")
+print("$(error This Makefile has been generated for OMNeT++ version $(REQUIRED_VERSION), but version $(OPP_VERSION) has been found. Please re-generate the Makefile using genmakefile.py)")
+print("endif\n")
+
 # output some variables
 print("# tool for indexing vec files")
 print("SCAVETOOL = opp_scavetool")
